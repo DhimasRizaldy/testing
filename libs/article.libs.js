@@ -4,6 +4,7 @@ const prisma = new PrismaClient();
 module.exports = {
   createArticle: async (title, body, user_id) => {
     try {
+      // membuat data artikel baru
       const existArticle = await prisma.article.findUnique({
         where: { id }
       });
@@ -18,6 +19,7 @@ module.exports = {
 
   getArticleId: async (id) => {
     try {
+      // Menampilkan detail data artikel by id
       const article = await prisma.article.findUnique({
         where: {
           id
@@ -31,24 +33,37 @@ module.exports = {
     }
   },
 
-  getAllArticle: async (title, body, user_id) => {
+  getAllArticle: async () => {
     try {
+      // mengambil semua artikel dari database
+      const article = await prisma.article.findMany();
+      return article;
 
     } catch (err) {
       throw err;
     }
   },
 
-  getUpdateId: async () => {
+  getUpdate: async (title, body, user_id) => {
     try {
+      // Mempeebarui artikel by id
+      const updateArticle = await prisma.article.update({
+        where: { id },
+        data: { title, body, user_id }
+      });
+      return updateArticle;
 
     } catch (err) {
       throw err;
     }
   },
 
-  getDelete: async () => {
+  getDelete: async (id) => {
     try {
+      // menghapus article by id
+      await prisma.article.delete({
+        where: { id }
+      });
 
     } catch (err) {
       throw err;
