@@ -16,5 +16,8 @@
     "morgan": "~1.9.1",
     "prisma": "^5.4.2",
     "supertest": "^6.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
