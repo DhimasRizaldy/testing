@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 module.exports = {
@@ -6,11 +6,13 @@ module.exports = {
     try {
       // membuat data artikel baru
       const existArticle = await prisma.article.findUnique({
-        where: { id }
+        where: { id },
       });
-      if (existArticle) throw 'id sudah dipakai';
+      if (existArticle) throw "id sudah dipakai";
 
-      const article = await prisma.article.create({ data: { title, body, user_id } });
+      const article = await prisma.article.create({
+        data: { title, body, user_id },
+      });
       return article;
     } catch (err) {
       throw err;
@@ -22,10 +24,10 @@ module.exports = {
       // Menampilkan detail data artikel by id
       const article = await prisma.article.findUnique({
         where: {
-          id
-        }
+          id,
+        },
       });
-      if (!article) throw 'article tidak ditemukan';
+      if (!article) throw "article tidak ditemukan";
 
       return article;
     } catch (err) {
@@ -38,7 +40,6 @@ module.exports = {
       // mengambil semua artikel dari database
       const article = await prisma.article.findMany();
       return article;
-
     } catch (err) {
       throw err;
     }
@@ -49,10 +50,9 @@ module.exports = {
       // Mempeebarui artikel by id
       const updateArticle = await prisma.article.update({
         where: { id },
-        data: { title, body, user_id }
+        data: { title, body, user_id },
       });
       return updateArticle;
-
     } catch (err) {
       throw err;
     }
@@ -62,13 +62,10 @@ module.exports = {
     try {
       // menghapus article by id
       await prisma.article.delete({
-        where: { id }
+        where: { id },
       });
-
     } catch (err) {
       throw err;
     }
-  }
-
-
-}
+  },
+};
